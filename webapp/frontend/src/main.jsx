@@ -8,7 +8,7 @@ import Signin from './components/signin.jsx'
 import Dashboard from './components/dashboard.jsx'
 import PresentationUI from './components/presentation.jsx'
 import Classes from './components/class.jsx'
-import ProtectedRoute from './components/ProtectedRoute.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -16,17 +16,25 @@ createRoot(document.getElementById('root')).render(
       <Routes>
 
         <Route path="/" element={<Signin />} />
-        <Route path="/classes" element={<Classes />} />
+
+        <Route path="/classes" element={
+          <ProtectedRoute> <Classes />
+          </ProtectedRoute>
+        } />
+
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Dashboard />
           </ProtectedRoute>
         } />
+
         <Route path="/presentation" element={
           <ProtectedRoute>
             <PresentationUI />
           </ProtectedRoute>
         } />
+
+
       </Routes>
     </BrowserRouter>
   </StrictMode>,

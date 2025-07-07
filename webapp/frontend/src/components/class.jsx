@@ -1,6 +1,9 @@
+
 import { Book, Pen } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 
 const Classes = () => {
+    const navigate = useNavigate();
     return (
         <div className="min-h-screen relative overflow-hidden bg-gradient-to-r from-[#D0F4DE] to-[#FDFFB6]">
             {/* Floating Study Elements Background */}
@@ -44,7 +47,10 @@ const Classes = () => {
                                 <p className="text-gray-600 mb-6">
                                     Subjects and resources for Class 6 - Building strong foundations in core subjects
                                 </p>
-                                <button className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
+                                <button
+                                    className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
+                                    onClick={() => navigate('/dashboard')}
+                                >
                                     View Details
                                 </button>
                             </div>
@@ -61,7 +67,11 @@ const Classes = () => {
                                 <p className="text-gray-600 mb-6">
                                     Subjects and resources for Class 7 - Advancing knowledge and critical thinking
                                 </p>
-                                <button className="w-full text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 hover:opacity-90" style={{ backgroundColor: '#00bbf9' }}>
+                                <button
+                                    className="w-full text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 hover:opacity-90"
+                                    style={{ backgroundColor: '#00bbf9' }}
+                                    onClick={() => navigate('/dashboard')}
+                                >
                                     View Details
                                 </button>
                             </div>
@@ -78,7 +88,11 @@ const Classes = () => {
                                 <p className="text-gray-600 mb-6">
                                     Subjects and resources for Class 8 - Preparing for advanced concepts
                                 </p>
-                                <button className="w-full text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 hover:opacity-90" style={{ backgroundColor: '#98f5e1' }}>
+                                <button
+                                    className="w-full text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 hover:opacity-90"
+                                    style={{ backgroundColor: '#98f5e1' }}
+                                    onClick={() => navigate('/dashboard')}
+                                >
                                     View Details
                                 </button>
                             </div>

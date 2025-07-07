@@ -21,7 +21,7 @@ const SignInForm = () => {
             const data = await signin({ email, password });
             // Store session info (e.g., JWT or session object)
             setSession(data.data?.session || {});
-            navigate('/dashboard');
+            navigate('/classes');
         } catch (err) {
             setError(err.message || 'Failed to sign in. Please try again.');
         } finally {
