@@ -30,46 +30,46 @@ const SignInForm = () => {
     };
 
     return (
-        <div className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{
+        <div className="relative min-h-screen flex items-center justify-center overflow-hidden px-2 sm:px-4 py-6 sm:py-0" style={{
             background: '#FFF8E7'
         }}>
             {/* Soft overlay for depth */}
             <div className="absolute inset-0 bg-white/40 backdrop-blur-sm pointer-events-none z-0" />
-            <div className="relative z-10 w-full max-w-4xl flex flex-col md:flex-row rounded-3xl shadow-2xl overflow-hidden bg-white/30 backdrop-blur-xl border border-white/40" style={{ boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.18)' }}>
+            <div className="relative z-10 w-full max-w-4xl flex flex-col md:flex-row rounded-3xl shadow-2xl overflow-hidden bg-white/30 backdrop-blur-xl border border-white/40 mx-auto" style={{ boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.18)' }}>
                 {/* Left: Animation */}
-                <div className="hidden md:flex md:w-1/2 items-center justify-center bg-gradient-to-br from-emerald-400/80 to-purple-400/80 relative">
+                <div className="hidden md:flex md:w-1/2 items-center justify-center bg-gradient-to-br from-emerald-400/80 to-purple-400/80 relative min-h-[180px]">
                     <div className="absolute inset-0 bg-white/10 backdrop-blur-md" />
-                    <div className="flex flex-col items-center justify-center w-full h-full p-8 relative z-10">
+                    <div className="flex flex-col items-center justify-center w-full h-full p-4 md:p-8 relative z-10">
                         <DotLottieReact
                             src="https://lottie.host/75ed4659-6fdf-40fb-8c00-41e3a0a12203/aR9wKCfIRt.lottie"
                             loop
                             autoplay
-                            style={{ width: 320, height: 320, maxWidth: '100%' }}
+                            style={{ width: 200, height: 200, maxWidth: '100%' }}
                         />
                     </div>
                 </div>
                 {/* Right: Sign In Form */}
-                <div className="w-full md:w-1/2 flex items-center justify-center bg-white/70 p-8">
-                    <div className="max-w-md w-full space-y-8">
+                <div className="w-full md:w-1/2 flex items-center justify-center bg-white/70 p-4 sm:p-8">
+                    <div className="max-w-md w-full space-y-6 sm:space-y-8">
                         <div className="text-center">
-                            <h2 className="mt-2 text-3xl font-extrabold text-gray-900 drop-shadow-sm">
+                            <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-gray-900 drop-shadow-sm">
                                 Sign in to your account
                             </h2>
                         </div>
                         {error && (
-                            <div className="rounded-md bg-red-50 p-4 animate-pulse">
+                            <div className="rounded-md bg-red-50 p-3 sm:p-4 animate-pulse">
                                 <div className="flex">
                                     <div className="ml-3">
-                                        <h3 className="text-sm font-medium text-red-800">{error}</h3>
+                                        <h3 className="text-xs sm:text-sm font-medium text-red-800">{error}</h3>
                                     </div>
                                 </div>
                             </div>
                         )}
-                        <form className="mt-8 space-y-6" onSubmit={handleSubmit} autoComplete="off">
+                        <form className="mt-6 sm:mt-8 space-y-4 sm:space-y-6" onSubmit={handleSubmit} autoComplete="off">
                             <input type="hidden" name="remember" value="true" />
-                            <div className="rounded-xl shadow-sm space-y-4">
+                            <div className="rounded-xl shadow-sm space-y-3 sm:space-y-4">
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1 text-left w-full">
+                                    <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 text-left w-full">
                                         Email address
                                     </label>
                                     <input
@@ -80,12 +80,12 @@ const SignInForm = () => {
                                         required
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="transition-all duration-200 mt-1 appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 sm:text-sm bg-white/80 backdrop-blur"
+                                        className="transition-all duration-200 mt-1 appearance-none block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 text-xs sm:text-sm bg-white/80 backdrop-blur"
                                         placeholder="you@example.com"
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1 text-left w-full">
+                                    <label htmlFor="password" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 text-left w-full">
                                         Password
                                     </label>
                                     <input
@@ -96,7 +96,7 @@ const SignInForm = () => {
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="transition-all duration-200 mt-1 appearance-none block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 sm:text-sm bg-white/80 backdrop-blur"
+                                        className="transition-all duration-200 mt-1 appearance-none block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 text-xs sm:text-sm bg-white/80 backdrop-blur"
                                         placeholder="••••••••"
                                     />
                                 </div>
@@ -111,7 +111,7 @@ const SignInForm = () => {
                                         onChange={(e) => setRememberMe(e.target.checked)}
                                         className="h-4 w-4 text-emerald-500 focus:ring-emerald-400 border-gray-300 rounded transition-all duration-200"
                                     />
-                                    <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                                    <label htmlFor="remember-me" className="ml-2 block text-xs sm:text-sm text-gray-900">
                                         Remember me
                                     </label>
                                 </div>
@@ -120,7 +120,7 @@ const SignInForm = () => {
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className={`transition-all duration-200 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-emerald-500 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 shadow-lg ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+                                    className={`transition-all duration-200 group relative w-full flex justify-center py-2 px-4 border border-transparent text-xs sm:text-sm font-medium rounded-lg text-white bg-emerald-500 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 shadow-lg ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
                                 >
                                     {isLoading ? (
                                         <>
@@ -134,19 +134,19 @@ const SignInForm = () => {
                                 </button>
                             </div>
                         </form>
-                        <div className="mt-4 text-center">
-                            <span className="text-gray-600 text-sm">
-                                {' '}
+                        <div className="mt-3 sm:mt-4 text-center">
+                            <span className="text-gray-600 text-xs sm:text-sm">
+                                Don't have an account?{' '}
                                 <button
                                     type="button"
                                     className="font-medium text-purple-500 hover:text-purple-400 underline bg-transparent border-none cursor-pointer transition-colors duration-150"
                                     onClick={() => navigate('/signup')}
                                 >
-
+                                    Sign up
                                 </button>
                             </span>
                         </div>
-                        <div className="mt-6 text-center text-sm text-gray-600">
+                        <div className="mt-4 sm:mt-6 text-center text-xs sm:text-sm text-gray-600 break-words">
                             Facing issue with signin? Contact <a href="mailto:gauravbshet08@gmail.com" className="text-purple-500 underline">gauravbshet08@gmail.com</a>
                         </div>
                     </div>
