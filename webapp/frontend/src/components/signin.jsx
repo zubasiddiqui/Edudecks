@@ -1,5 +1,5 @@
 import React from 'react';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Lottie from "lottie-react";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signin } from '../api/auth';
@@ -40,7 +40,7 @@ const SignInForm = () => {
                 <div className="hidden md:flex md:w-1/2 items-center justify-center bg-gradient-to-br from-emerald-400/80 to-purple-400/80 relative min-h-[180px]">
                     <div className="absolute inset-0 bg-white/10 backdrop-blur-md" />
                     <div className="flex flex-col items-center justify-center w-full h-full p-4 md:p-8 relative z-10">
-                        <DotLottieReact
+                        <Lottie
                             src="https://lottie.host/75ed4659-6fdf-40fb-8c00-41e3a0a12203/aR9wKCfIRt.lottie"
                             loop
                             autoplay
