@@ -1,5 +1,6 @@
 
 from routers import auth_router  # Import the authentication router
+from routers import ppt_router
 from services import auth as auth_service
 from models.auth import AuthResponse  # Assuming this is correctly defined
 from fastapi import FastAPI, Query, HTTPException, BackgroundTasks, Depends
@@ -38,6 +39,8 @@ token_auth_scheme = HTTPBearer()
 
 # Include the authentication router
 app.include_router(auth_router.router, prefix="/auth", tags=["Authentication"])
+# Include the PPT generation router
+app.include_router(ppt_router.router, prefix="/ppt", tags=["PPT Generation"])
 
 
 # Routes

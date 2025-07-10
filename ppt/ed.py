@@ -280,11 +280,17 @@ def create_powerpoint(slides, topic, class_level, subject, language="English"):
     filename = sanitize_filename(
         f"Class{class_level}_{subject}_{topic}_presentation.pptx".replace(" ", "_"))
     prs.save(filename)
-    print(f"✅ PowerPoint saved as: {filename}")
+    try:
+        print(f"✅ PowerPoint saved as: {filename}")
+    except UnicodeEncodeError:
+        print(f"PowerPoint saved as: {filename}")
 
 
 def run_generator():
-    print("\n🎓 AI Slide Generator")
+    try:
+        print("\n🎓 AI Slide Generator")
+    except UnicodeEncodeError:
+        print("\nAI Slide Generator")
     class_level = input("Grade level (e.g. 5): ")
     subject = input("Subject: ")
     topic = input("Topic: ")

@@ -12,8 +12,9 @@ except ImportError:
 
 load_dotenv()
 
-SUPABASE_URL = "https://hvcjaaqatrgvouvrydzd.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2Y2phYXFhdHJndm91dnJ5ZHpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MzMyNTMsImV4cCI6MjA2NzEwOTI1M30.dwKjdJ-JoiCZJAnqn7mPlW0InQ3z8hsFA5wd8U0b7fA"
+# Read Supabase credentials from environment variables
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 if not SUPABASE_URL or not SUPABASE_KEY:
     print("Warning: Supabase URL or Key not found in environment variables. Auth services will not work.")

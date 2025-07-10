@@ -5,14 +5,17 @@ import { signout } from '../api/auth';
 
 const PresentationUI = () => {
     const [formData, setFormData] = useState({
+        grade: '',
         subject: '',
         topic: '',
+        language: 'English',
         pages: 5
     });
 
     const [generatedSlides, setGeneratedSlides] = useState([]);
     const [isGenerating, setIsGenerating] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [pptDownloadUrl, setPptDownloadUrl] = useState(null);
 
     const navigate = useNavigate();
 
@@ -43,28 +46,43 @@ const PresentationUI = () => {
     };
 
     const handleGeneratePPT = async () => {
-        if (!formData.subject || !formData.topic) {
+        if (!formData.grade || !formData.subject || !formData.topic || !formData.language || !formData.pages) {
             alert('Please fill in all required fields');
             return;
         }
 
         setIsGenerating(true);
+        setPptDownloadUrl(null);
+        setGeneratedSlides([]);
 
-        // Simulate API call
-        setTimeout(() => {
-            const slides = Array.from({ length: parseInt(formData.pages) }, (_, index) => ({
-                id: index + 1,
-                title: index === 0
-                    ? `${formData.subject}: ${formData.topic}`
-                    : `${formData.topic} - Slide ${index + 1}`,
-                content: index === 0
-                    ? `Introduction to ${formData.topic}`
-                    : `Content for slide ${index + 1} about ${formData.topic}. This slide covers key concepts and important information related to ${formData.subject}.`
-            }));
+        try {
+            const response = await fetch('http://localhost:8000/ppt/generate-ppt', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    grade: formData.grade,
+                    subject: formData.subject,
+                    topic: formData.topic,
+                    language: formData.language,
+                    pages: Number(formData.pages),
+                }),
+            });
 
-            setGeneratedSlides(slides);
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.detail || 'Failed to generate PPT');
+            }
+
+            const data = await response.json();
+            setPptDownloadUrl(data.public_url);
+            setGeneratedSlides([{ id: 1, title: 'Download PPT', content: '' }]);
+        } catch (err) {
+            alert(err.message || 'Error generating PPT');
+        } finally {
             setIsGenerating(false);
-        }, 2000);
+        }
     };
 
     return (
@@ -130,16 +148,40 @@ const PresentationUI = () => {
                             <div className="space-y-4 sm:space-y-6">
                                 <div>
                                     <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                                        Subject *
+                                        Grade Level *
                                     </label>
                                     <input
-                                        type="text"
+                                        type="number"
+                                        name="grade"
+                                        value={formData.grade}
+                                        onChange={handleInputChange}
+                                        placeholder="e.g., 5"
+                                        min="1"
+                                        max="12"
+                                        className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-xs sm:text-sm"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
+                                        Subject *
+                                    </label>
+                                    <select
                                         name="subject"
                                         value={formData.subject}
                                         onChange={handleInputChange}
-                                        placeholder="e.g., Computer Science"
                                         className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-xs sm:text-sm"
-                                    />
+                                    >
+                                        <option value="">Select Subject</option>
+                                        <option value="English">English</option>
+                                        <option value="Urdu">Urdu</option>
+                                        <option value="Hindi">Hindi</option>
+                                        <option value="Marathi">Marathi</option>
+                                        <option value="Science">Science</option>
+                                        <option value="History">History</option>
+                                        <option value="Civics">Civics</option>
+                                        <option value="Geography">Geography</option>
+                                        <option value="Maths">Maths</option>
+                                    </select>
                                 </div>
                                 <div>
                                     <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
@@ -150,21 +192,37 @@ const PresentationUI = () => {
                                         name="topic"
                                         value={formData.topic}
                                         onChange={handleInputChange}
-                                        placeholder="e.g., Machine Learning Basics"
+                                        placeholder="e.g., Noun"
                                         className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-xs sm:text-sm"
                                     />
                                 </div>
                                 <div>
                                     <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
-                                        Number of Pages
+                                        Language *
+                                    </label>
+                                    <select
+                                        name="language"
+                                        value={formData.language}
+                                        onChange={handleInputChange}
+                                        className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-xs sm:text-sm"
+                                    >
+                                        <option value="English">English</option>
+                                        <option value="Urdu">Urdu</option>
+                                        <option value="Hindi">Hindi</option>
+                                        <option value="Marathi">Marathi</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
+                                        Number of Slides
                                     </label>
                                     <input
                                         type="number"
                                         name="pages"
                                         value={formData.pages}
                                         onChange={handleInputChange}
-                                        min="1"
-                                        max="20"
+                                        min="3"
+                                        max="10"
                                         className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-xs sm:text-sm"
                                     />
                                 </div>
@@ -194,7 +252,15 @@ const PresentationUI = () => {
                             <h3 className="text-lg sm:text-xl font-bold text-gray-800">Preview</h3>
                         </div>
                         <div className="p-4 sm:p-6 h-full overflow-y-auto">
-                            {generatedSlides.length === 0 ? (
+                            {pptDownloadUrl ? (
+                                <div className="flex flex-col items-center justify-center h-48 sm:h-64 text-gray-700">
+                                    <div className="text-center">
+                                        <FileSliders className="w-10 sm:w-12 h-10 sm:h-12 mx-auto mb-3 sm:mb-4 text-blue-500" />
+                                        <p className="text-base sm:text-lg font-medium mb-2">Your PPT is ready!</p>
+                                        <a href={pptDownloadUrl} target="_blank" rel="noopener noreferrer" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow transition-colors">Download Presentation</a>
+                                    </div>
+                                </div>
+                            ) : generatedSlides.length === 0 ? (
                                 <div className="flex items-center justify-center h-48 sm:h-64 text-gray-500">
                                     <div className="text-center">
                                         <FileSliders className="w-10 sm:w-12 h-10 sm:h-12 mx-auto mb-3 sm:mb-4 text-gray-400" />
