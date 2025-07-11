@@ -34,69 +34,78 @@ const Classes = () => {
                     <h1 className="text-6xl font-bold mb-6 text-gray-800">Select Your Class</h1>
                     <p className="text-xl text-gray-600 mb-12">Choose your class to access tailored educational content and resources</p>
                     {/* Class Cards */}
-                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                        {/* Class 6 */}
-                        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
-                            <div className="bg-green-500 p-8 text-white">
-                                <div className="w-16 h-16 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
-                                    <span className="text-2xl font-bold">6</span>
+                    <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                        {[
+                            {
+                                number: 1,
+                                color: '#f9c74f',
+                                textColor: 'text-gray-800',
+                                description: 'Subjects and resources for Class 1 - Early learning and fun activities.'
+                            },
+                            {
+                                number: 2,
+                                color: '#90be6d',
+                                textColor: 'text-white',
+                                description: 'Subjects and resources for Class 2 - Building on basics with engaging lessons.'
+                            },
+                            {
+                                number: 3,
+                                color: '#43aa8b',
+                                textColor: 'text-white',
+                                description: 'Subjects and resources for Class 3 - Exploring new concepts and ideas.'
+                            },
+                            {
+                                number: 4,
+                                color: '#577590',
+                                textColor: 'text-white',
+                                description: 'Subjects and resources for Class 4 - Strengthening knowledge and skills.'
+                            },
+                            {
+                                number: 5,
+                                color: '#f3722c',
+                                textColor: 'text-white',
+                                description: 'Subjects and resources for Class 5 - Preparing for upper primary.'
+                            },
+                            {
+                                number: 6,
+                                color: '#43c6ac',
+                                textColor: 'text-white',
+                                description: 'Subjects and resources for Class 6 - Building strong foundations in core subjects.'
+                            },
+                            {
+                                number: 7,
+                                color: '#00bbf9',
+                                textColor: 'text-white',
+                                description: 'Subjects and resources for Class 7 - Advancing knowledge and critical thinking.'
+                            },
+                            {
+                                number: 8,
+                                color: '#98f5e1',
+                                textColor: 'text-gray-800',
+                                description: 'Subjects and resources for Class 8 - Preparing for advanced concepts.'
+                            }
+                        ].map(cls => (
+                            <div key={cls.number} className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                                <div className={`p-8 ${cls.textColor}`} style={{ backgroundColor: cls.color }}>
+                                    <div className="w-16 h-16 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
+                                        <span className="text-2xl font-bold">{cls.number}</span>
+                                    </div>
+                                    <h3 className="text-2xl font-bold">Class {cls.number}</h3>
                                 </div>
-                                <h3 className="text-2xl font-bold">Class 6</h3>
-                            </div>
-                            <div className="p-6">
-                                <p className="text-gray-600 mb-6">
-                                    Subjects and resources for Class 6 - Building strong foundations in core subjects
-                                </p>
-                                <button
-                                    className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
-                                    onClick={() => navigate('/dashboard')}
-                                >
-                                    View Details
-                                </button>
-                            </div>
-                        </div>
-                        {/* Class 7 */}
-                        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
-                            <div className="p-8 text-white" style={{ backgroundColor: '#00bbf9' }}>
-                                <div className="w-16 h-16 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
-                                    <span className="text-2xl font-bold">7</span>
+                                <div className="p-6">
+                                    <p className="text-gray-600 mb-6">
+                                        {cls.description}
+                                    </p>
+                                    <button
+                                        className="w-full font-semibold py-3 px-6 rounded-lg transition-colors duration-200 hover:opacity-90"
+                                        style={{ backgroundColor: cls.color, color: cls.textColor === 'text-white' ? '#fff' : '#222' }}
+                                        onClick={() => navigate('/dashboard')}
+                                    >
+                                        View Details
+                                    </button>
                                 </div>
-                                <h3 className="text-2xl font-bold">Class 7</h3>
                             </div>
-                            <div className="p-6">
-                                <p className="text-gray-600 mb-6">
-                                    Subjects and resources for Class 7 - Advancing knowledge and critical thinking
-                                </p>
-                                <button
-                                    className="w-full text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 hover:opacity-90"
-                                    style={{ backgroundColor: '#00bbf9' }}
-                                    onClick={() => navigate('/dashboard')}
-                                >
-                                    View Details
-                                </button>
-                            </div>
-                        </div>
-                        {/* Class 8 */}
-                        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
-                            <div className="p-8 text-gray-800" style={{ backgroundColor: '#98f5e1' }}>
-                                <div className="w-16 h-16 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
-                                    <span className="text-2xl font-bold">8</span>
-                                </div>
-                                <h3 className="text-2xl font-bold">Class 8</h3>
-                            </div>
-                            <div className="p-6">
-                                <p className="text-gray-600 mb-6">
-                                    Subjects and resources for Class 8 - Preparing for advanced concepts
-                                </p>
-                                <button
-                                    className="w-full text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 hover:opacity-90"
-                                    style={{ backgroundColor: '#98f5e1' }}
-                                    onClick={() => navigate('/dashboard')}
-                                >
-                                    View Details
-                                </button>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                     <p className="text-gray-500 mt-12">
                         Need help choosing? Contact our support team for guidance.
